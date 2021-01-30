@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     eState m_myState;
     NavMeshAgent m_nav;
 
-    GameObject<PlayerController> m_player;
+    PlayerController m_player;
 
     Vector3 m_lastKnownPlayerPos;
 
@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
         m_myState = eState.PATROL;
         m_nav = GetComponent<NavMeshAgent>();
 
-        m_player = GameObject.FindGameObjectWithTag( "Player" );
+        m_player = GameObject.FindGameObjectWithTag( "Player" ).GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
