@@ -1,0 +1,55 @@
+============================================
+	FOGGY MAZE
+============================================
+Modular:
+Arch
+Chain
+Vaulted ceiling?
+
+Tiling textures:
+Floor
+Wall
+Wall/Floor detail for vertex paint
+
+Detail:
+Candle
+Tall Candle holder?
+Wall Candle holder
+Cage
+Tomb
+Skull
+
+
+============================================
+	SPIDERWEB CATACOMBS
+============================================
+Modular:
+Arch opening
+Grate
+
+Tiling textures:
+Floor
+Wall
+Wall/Floor detail for vertex paint
+Ceiling? (maybe just copy wall?)
+
+Detail:
+Spiderwebs
+Chains
+Skeletons
+
+
+============================================
+	BLOOD DEMON
+============================================
+Modular:
+Stairway
+Skull wall blood drooler things
+
+Tiling textures:
+Wall
+Blood floor
+
+Detail:
+Big demon
+Runes/Sigils?
