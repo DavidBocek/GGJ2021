@@ -38,10 +38,11 @@ public class PlayerController : MonoBehaviour, ICharacterController
 	private float m_curHeadbobFrequency;
 	private float m_headbobStartTime;
 
+    [Header( "Flashlight" )]
+    private bool m_flashlightOn;
 
-
-	//refs
-	private GameObject m_cameraObj;
+    //refs
+    private GameObject m_cameraObj;
 	private KinematicCharacterMotor m_motor;
 
     void Start()
@@ -60,6 +61,8 @@ public class PlayerController : MonoBehaviour, ICharacterController
 		m_initialCamLocalPos = m_cameraObj.transform.localPosition;
 		m_cameraRotation = m_cameraObj.transform.localRotation;
 		m_characterHorizontalRotation = transform.rotation;
+
+        m_flashlightOn = false;
     }
 
     void Update()
@@ -218,4 +221,10 @@ public class PlayerController : MonoBehaviour, ICharacterController
 	{
 		return;
 	}
+
+    // Accessors
+    public bool IsFlashlightOn()
+    {
+        return m_flashlightOn;
+    }
 }
