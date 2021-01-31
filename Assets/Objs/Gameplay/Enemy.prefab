@@ -165,7 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints:
   - {fileID: 0}
-  poopy: 1
+  - {fileID: 0}
+  - {fileID: 0}
+  poopy: 0
+  poop: {fileID: 3650367026794461563, guid: bef3c0b832299a14abbf1b13c53ee45c, type: 3}
   fov: 120
   maxSightDistDark: 10
   maxSightDistLight: 20

@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public List<GameObject> patrolPoints;
     public bool poopy;
+    public GameObject poop;
     public float fov;
     public float maxSightDistDark;
     public float maxSightDistLight;
@@ -49,7 +50,7 @@ public class EnemyBehaviour : MonoBehaviour
         SwitchState( eState.PATROL );
         m_nav = GetComponent<NavMeshAgent>();
         m_targetPatrolIndex = -1;
-        m_newDest = true;
+        m_newDest = false;
 
         m_playerObj = GameObject.FindGameObjectWithTag( "Player" );
         m_player = m_playerObj.GetComponent<PlayerController>();
@@ -58,6 +59,11 @@ public class EnemyBehaviour : MonoBehaviour
         m_canSeePlayer = false;
 
         m_minDot = Mathf.Cos( Mathf.Deg2Rad * fov );
+
+        if ( poopy )
+        {
+            StartCoroutine( "Poopy" );
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +74,7 @@ public class EnemyBehaviour : MonoBehaviour
         Act();
 
         DebugExtension.DrawPoint( m_nav.destination );
+        Debug.Log( m_curState );
     }
 
     void Sense()
@@ -103,7 +110,7 @@ public class EnemyBehaviour : MonoBehaviour
                     SwitchState( eState.CHASE );
                 }
 
-                if ( ArrivedAtDestination() )
+                if ( !m_newDest && ArrivedAtDestination() )
                 {
                     SwitchState( eState.IDLE );
                 }
@@ -230,5 +237,16 @@ public class EnemyBehaviour : MonoBehaviour
     bool ArrivedAtDestination()
     {
         return Vector3.Distance( transform.position, m_nav.destination ) < destinationStoppingDist;
+    }
+
+    IEnumerator Poopy()
+    {
+        while ( true )
+        {
+            if ( Random.value <= 0.5f )
+                GameObject.Instantiate( poop, transform.position, transform.rotation );
+
+            yield return new WaitForSeconds( 10.0f );
+        }
     }
 }
