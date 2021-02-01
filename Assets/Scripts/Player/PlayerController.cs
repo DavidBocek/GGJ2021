@@ -41,6 +41,13 @@ public class PlayerController : MonoBehaviour, ICharacterController
     [Header( "Flashlight" )]
     private bool m_flashlightOn;
 
+    [Header( "Audio" )]
+    public List<AudioClip> caveFootsteps;
+    public List<AudioClip> outsideFootsteps;
+    private List<AudioClip> m_footstepSounds;
+    private bool m_hasPlayedFootstep;
+    private AudioSource m_audioSrc;
+
     //refs
     private GameObject m_cameraObj;
 	private KinematicCharacterMotor m_motor;
@@ -63,6 +70,10 @@ public class PlayerController : MonoBehaviour, ICharacterController
 		m_characterHorizontalRotation = transform.rotation;
 
         m_flashlightOn = false;
+
+        m_audioSrc = GetComponent<AudioSource>();
+        m_footstepSounds = caveFootsteps;
+        m_hasPlayedFootstep = false;
     }
 
     void Update()
@@ -179,6 +190,25 @@ public class PlayerController : MonoBehaviour, ICharacterController
 		{
 			m_curHeadbobFrequency = ScriptUtil.AsymptoticLerp( m_curHeadbobFrequency, headbobFrequencyWalk, 0.3f, deltaTime );
 		}
+
+        if ( m_isHeadbobbing && ( Mathf.Abs( input.x ) > 0f || Mathf.Abs( input.y ) > 0f ) )
+        {
+            if ( !m_hasPlayedFootstep )
+            {
+                if ( m_curHeadbob < 0 && ( curHeadbobAmplitude - Mathf.Abs( m_curHeadbob ) ) < 0.005 )
+                {
+                    m_audioSrc.PlayOneShot( m_footstepSounds[ Random.Range( 0, m_footstepSounds.Count ) ] );
+                    m_hasPlayedFootstep = true;
+                }
+            }
+            else
+            {
+                if ( Mathf.Abs( m_curHeadbob ) < 0.01 )
+                {
+                    m_hasPlayedFootstep = false;
+                }
+            }
+        }
 	}
 
 
